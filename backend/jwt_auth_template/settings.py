@@ -20,7 +20,7 @@ SECRET_KEY = getenv('DJANGO_SECRET_KEY', get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost,*').split(',')
 
 
 # Application definition
@@ -99,7 +99,7 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_PARAMS = {
     'fields': 'email, first_name, last_name'
 }
 
-CORS_ALLOWED_ORIGINS = getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173').split(',')
+CORS_ALLOWED_ORIGINS = getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000').split(',')
 CORS_ALLOW_CREDENTIALS = True
 
 
@@ -131,7 +131,7 @@ WSGI_APPLICATION = 'jwt_auth_template.wsgi.application'
 DATABASES = {
 "default": {
 "ENGINE": "django.db.backends.postgresql",
-"NAME": "jwt_Template_db", 
+"NAME": "jwt_template_db", 
 "USER": "postgres",
 "PASSWORD": "postgres",
 "HOST": "localhost",

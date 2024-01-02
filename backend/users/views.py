@@ -7,6 +7,7 @@ from rest_framework import status
 
 class CustomProviderAuthView(ProviderAuthView):
     def post(self, request, *args, **kwargs):
+        print(request.data, 'do we see request?')
         response = super().post(request, *args, **kwargs)
         if response.status_code == 201:
             access_token = response.data.get('access')
@@ -36,7 +37,9 @@ class CustomProviderAuthView(ProviderAuthView):
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
+        print(request.data, 'do we see request?')
         response = super().post(request, *args, **kwargs)
+
 
         if response.status_code == 200:
             access_token = response.data.get('access')
@@ -65,6 +68,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     
 class CustomTokenRefreshView(TokenRefreshView):
     def post(self, request, *args, **kwargs):
+        print(request.data, 'do we see request?')
         refresh_token = request.COOKIES.get('refresh')
 
         if refresh_token:
@@ -88,6 +92,7 @@ class CustomTokenRefreshView(TokenRefreshView):
 
 class CustomTokenVerifyView(TokenVerifyView):
     def post(self, request, *args, **kwargs):
+        print(request.data, 'do we see request?')
         access_token = request.COOKIES.get('access')
 
         if access_token:
