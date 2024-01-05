@@ -1,0 +1,43 @@
+version: "3"
+services:
+  api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=$DEBUG
+      - DEVELOPMENT_MODE=$DEVELOPMENT_MODE
+      - DOMAIN=$DOMAIN
+      - REDIRECT_URLS=$REDIRECT_URLS
+      - AUTH_COOKIE_SECURE=$AUTH_COOKIE_SECURE
+      - SECRET_KEY=$SECRET_KEY
+      - GOOGLE_AUTH_KEY=$GOOGLE_AUTH_KEY
+      - GOOGLE_AUTH_SECRET_KEY=$GOOGLE_AUTH_SECRET_KEY
+      - AWS_SES_ACCESS_KEY_ID=$AWS_SES_ACCESS_KEY_ID
+      - AWS_SES_SECRET_ACCESS_KEY=$AWS_SES_SECRET_ACCESS_KEY
+      - AWS_SES_REGION_NAME=$AWS_SES_REGION_NAME
+      - AWS_SES_FROM_EMAIL=$AWS_SES_FROM_EMAIL
+      - ALLOWED_HOSTS=$ALLOWED_HOSTS
+
+    depends_on:
+      - db
+
+  nginx:
+    build: 
+      context: .
+      dockerfile: ./webserver/Dockerfile
+    restart: always
+    ports:
+      - "80:80"
+      
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=jwt_template_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+volumes:
+  postgres_data:

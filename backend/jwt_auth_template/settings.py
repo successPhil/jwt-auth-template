@@ -20,23 +20,23 @@ SECRET_KEY = getenv('DJANGO_SECRET_KEY', get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost,*').split(',')
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'users',
-    'rest_framework',
-    'djoser',
-    'social_django',
-    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'rest_framework',
+    'djoser',
+    'social_django',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +68,7 @@ AUTHENTICATION_BACKENDS = [
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
-    'ACTIVATION_URL': '/activate/{uid}/{token}',
+    'ACTIVATION_URL': '/activation/{uid}/{token}',
     'USER_CREATE_PASSWORD_RETYPE': True,
     'SET_PASSWORD_RETYPE': True,
     'TOKEN_MODEL': None,
@@ -95,7 +95,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
 SOCIAL_AUTH_FACEBOOK_KEY = getenv('FACEBOOK_AUTH_KEY')
 SOCIAL_AUTH_FACEBOOK_SECRET = getenv('FACEBOOK_AUTH_SECRET_KEY')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_FACEBOOK_EXTRA_PARAMS = {
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'email, first_name, last_name'
 }
 
@@ -134,8 +134,8 @@ DATABASES = {
 "NAME": "jwt_template_db", 
 "USER": "postgres",
 "PASSWORD": "postgres",
-"HOST": "localhost",
-"PORT": 5454,
+"HOST": "db",
+"PORT": 5432,
     }
 }
 

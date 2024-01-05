@@ -1,12 +1,19 @@
-import { PasswordResetForm } from '@/components/forms';
+import { PasswordResetConfirmForm } from '@/components/forms';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	title: 'Full Auth | Password Reset',
-	description: 'Full Auth password reset page',
+	title: 'Full Auth | Password Reset Confirm',
+	description: 'Full Auth password reset confirm page',
 };
 
-export default function Page() {
+interface Props {
+	params: {
+		uid: string;
+		token: string;
+	};
+}
+
+export default function Page({ params: { uid, token } }: Props) {
 	return (
 		<div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
 			<div className='sm:mx-auto sm:w-full sm:max-w-sm'>
@@ -21,7 +28,7 @@ export default function Page() {
 			</div>
 
 			<div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
-				<PasswordResetForm />
+				<PasswordResetConfirmForm uid={uid} token={token} />
 			</div>
 		</div>
 	);
